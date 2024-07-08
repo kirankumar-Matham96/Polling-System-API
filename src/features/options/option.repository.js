@@ -12,7 +12,9 @@ export class OptionsRepository {
 
   get = async (optionId) => {
     try {
-      const option = await OptionModel.findById(optionId);
+      const option = await OptionModel.findById(optionId).populate(
+        "questionId"
+      );
       if (!option) {
         throw new ApplicationError("option not found", 404);
       }
@@ -24,7 +26,7 @@ export class OptionsRepository {
 
   getAll = async () => {
     try {
-      return await OptionModel.find();
+      return await OptionModel.find().populate("questionId");
     } catch (error) {
       throw error;
     }
@@ -32,7 +34,10 @@ export class OptionsRepository {
 
   update = async (optionId, data) => {
     try {
-      const option = await OptionModel.findByIdAndUpdate(optionId, data);
+      const option = await OptionModel.findByIdAndUpdate(
+        optionId,
+        data
+      ).populate("questionId");
       if (!option) {
         throw new ApplicationError("option not found", 404);
       }

@@ -12,10 +12,14 @@ export class QuestionRepository {
 
   get = async (questionId) => {
     try {
-      const question = await QuestionModel.findById(questionId);
+      const question = await QuestionModel.findById(questionId).populate(
+        "options"
+      );
+
       if (!question) {
         throw new ApplicationError("question not found", 404);
       }
+
       return question;
     } catch (error) {
       throw error;
@@ -24,7 +28,7 @@ export class QuestionRepository {
 
   getAll = async () => {
     try {
-      return await QuestionModel.find();
+      return await QuestionModel.find().populate("options");
     } catch (error) {
       throw error;
     }
@@ -32,7 +36,10 @@ export class QuestionRepository {
 
   update = async (questionId, data) => {
     try {
-      const question = await QuestionModel.findByIdAndUpdate(questionId, data);
+      const question = await QuestionModel.findByIdAndUpdate(
+        questionId,
+        data
+      ).populate("options");
       if (!question) {
         throw new ApplicationError("question not found", 404);
       }
