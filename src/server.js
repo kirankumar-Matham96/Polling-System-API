@@ -1,12 +1,14 @@
 import express from "express";
 import cors from "cors";
+import questionsRouter from "./features/questions/question.routes.js";
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// app.use();
+app.use("/api/polling-system",questionsRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Polling-API");
