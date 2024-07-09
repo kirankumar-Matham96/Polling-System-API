@@ -28,16 +28,16 @@ app.use("/api/polling-system/questions", questionsRouter);
 // Route for handling options-related requests
 app.use("/api/polling-system/options", optionsRouter);
 
+// Basic route to confirm the API is working
+app.get("/", (req, res) => {
+  res.send("Welcome to Polling-API");
+});
+
 // Middleware for handling unknown paths (404 errors)
 app.use(unknownPathHandlerMiddleware);
 
 // Middleware for handling errors
 app.use(errorHandlingMiddleware);
-
-// Basic route to confirm the API is working
-app.get("/", (req, res) => {
-  res.send("Welcome to Polling-API");
-});
 
 // Start the server and connect to the database
 app.listen(process.env.PORT, () => {
