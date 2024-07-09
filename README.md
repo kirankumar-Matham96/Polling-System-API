@@ -75,41 +75,25 @@ npm run dev
 
 ## Project Structure
 
-    POST AWAY - II/
+    Polling System App/
     ├── src/
     │ ├── config/
     │ │ └── db.config.js
     │ ├── features/
-    │ │ ├── companies/
-    │ │ | ├── company.controller.js
-    │ │ | ├── company.repository.js
-    │ │ | ├── company.routes.js
-    │ │ | └── company.schema.js
-    │ │ ├── interviews/
-    │ │ | ├── interview.controller.js
-    │ │ | ├── interview.repository.js
-    │ │ | ├── interview.routes.js
-    │ │ | └── interview.schema.js
-    │ │ ├── results/
-    │ │ | ├── result.controller.js
-    │ │ | ├── result.repository.js
-    │ │ | ├── result.routes.js
-    │ │ | └── result.schema.js
-    │ │ ├── student/
-    │ │ | ├── student.controller.js
-    │ │ | ├── student.repository.js
-    │ │ | ├── student.routes.js
-    │ │ | └── student.schema.js
-    │ │ └── users/
-    │ │   ├── user.controller.js
-    │ │   ├── user.repository.js
-    │ │   ├── user.routes.js
-    │ │   └── user.schema.js
+    │ │ ├── options/
+    │ │ | ├── option.controller.js
+    │ │ | ├── option.repository.js
+    │ │ | ├── option.routes.js
+    │ │ | └── option.schema.js
+    │ │ └── questions/
+    │ │   ├── question.controller.js
+    │ │   ├── question.repository.js
+    │ │   ├── question.routes.js
+    │ │   └── question.schema.js
     | └── middlewares/
-    │   ├── auth.middleware.js
-    │   ├── downloadHandler.middleware.js
     │   ├── errorHandling.middleware.js
-    │   └── unknownPathHandler.middleware.js
+    │   ├── unknownPathHandler.middleware.js
+    │   └── validation.middleware.js
     ├── .env
     ├── .gitignore
     ├── package-lock.json
