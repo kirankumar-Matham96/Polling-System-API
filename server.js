@@ -1,5 +1,5 @@
 /* TODO:
-  1. Validate the routes in postman
+  1. 
   2. Add form validations
   3. Add document
   4. Add Readme

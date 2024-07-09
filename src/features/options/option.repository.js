@@ -63,10 +63,20 @@ export class OptionsRepository {
 
   delete = async (optionId) => {
     try {
-      const option = await OptionModel.findByIdAndDelete(optionId);
+      const option = await OptionModel.findById(optionId);
+
       if (!option) {
         throw new ApplicationError("option not found", 404);
       }
+
+      if (option.votes > 0) {
+        throw new ApplicationError(
+          "Option has votes. This option cannot be deleted.",
+          403
+        );
+      }
+
+      await OptionModel.findByIdAndDelete(optionId);
       return option;
     } catch (error) {
       throw error;

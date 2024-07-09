@@ -76,7 +76,7 @@ export class OptionController {
   deleteOptionById = async (req, res, next) => {
     try {
       const { id } = req.params;
-      const deletedOption = await this.optionsRepository.deleteOptionById(id);
+      const deletedOption = await this.optionsRepository.delete(id);
       res
         .status(200)
         .json({ success: true, message: "Option deleted successfully" });
