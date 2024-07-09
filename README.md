@@ -122,7 +122,7 @@ npm run dev
 ### Postman Collection
 
 ```bash
-  https://www.postman.com/kirankumar96/workspace/kirankumar-matham-public-workspace/collection/15920123-5a539425-fc55-4e6b-9311-abf9b084da0b?action=share&creator=15920123
+  https://www.postman.com/kirankumar96/workspace/kirankumar-matham-public-workspace/collection/15920123-b701526f-853b-4ba2-93e3-d79b4ddc7666?action=share&creator=15920123
 ```
 
 ### Question Routes
