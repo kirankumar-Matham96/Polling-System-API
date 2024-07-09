@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 });
 
 // Start the server and connect to the database
-app.listen(3000, () => {
-  console.log("Server is running at port 3000");
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running at port ${process.env.PORT}`);
   connectToDB();
 });
