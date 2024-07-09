@@ -7,16 +7,22 @@ export class OptionController {
     this.questionRepository = new QuestionRepository();
   }
 
+  /**
+   * Adds a new option to a question and updates the question with the new option ID
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @param {Function} next - The next middleware function
+   */
   addOption = async (req, res, next) => {
     try {
       const { id } = req.params;
       const optionBody = {
         text: req.body.text,
       };
-      // transaction here
+      // Add new option
       const option = await this.optionsRepository.add(optionBody);
 
-      // updating question
+      // Update question with new option ID
       await this.questionRepository.updateWithNewOption(id, option._id);
 
       res
@@ -27,6 +33,12 @@ export class OptionController {
     }
   };
 
+  /**
+   * Retrieves all options from the database
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @param {Function} next - The next middleware function
+   */
   getAllOptions = async (req, res, next) => {
     try {
       const options = await this.optionsRepository.getAll();
@@ -36,6 +48,12 @@ export class OptionController {
     }
   };
 
+  /**
+   * Retrieves a specific option by its ID
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @param {Function} next - The next middleware function
+   */
   getOptionById = async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -46,6 +64,12 @@ export class OptionController {
     }
   };
 
+  /**
+   * Updates a specific option by its ID
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @param {Function} next - The next middleware function
+   */
   updateOptionById = async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -61,6 +85,12 @@ export class OptionController {
     }
   };
 
+  /**
+   * Adds a new vote to a specific option by its ID
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @param {Function} next - The next middleware function
+   */
   addNewVoteToOptionById = async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -73,6 +103,12 @@ export class OptionController {
     }
   };
 
+  /**
+   * Deletes a specific option by its ID
+   * @param {Object} req - The request object
+   * @param {Object} res - The response object
+   * @param {Function} next - The next middleware function
+   */
   deleteOptionById = async (req, res, next) => {
     try {
       const { id } = req.params;

@@ -1,13 +1,7 @@
-/* TODO:
-  1. 
-  2. Add form validations
-  3. Add document
-  4. Add Readme
-  5. Deploy and validate
-  6. Record and submit
-*/
-
+// Import environment variables from a .env file into process.env
 import "dotenv/config";
+
+// Import required modules
 import express from "express";
 import cors from "cors";
 import questionsRouter from "./src/features/questions/question.routes.js";
@@ -16,21 +10,36 @@ import { connectToDB } from "./src/config/db.config.js";
 import { errorHandlingMiddleware } from "./src/middlewares/errorHandler.middleware.js";
 import { unknownPathHandlerMiddleware } from "./src/middlewares/unknownPathHandler.middleware.js";
 
+// Initialize the express application
 const app = express();
 
+// Middleware to parse incoming JSON requests
 app.use(express.json());
+
+// Middleware to parse URL-encoded data
 app.use(express.urlencoded({ extended: true }));
+
+// Middleware to enable Cross-Origin Resource Sharing (CORS)
 app.use(cors());
 
+// Route for handling questions-related requests
 app.use("/api/polling-system/questions", questionsRouter);
+
+// Route for handling options-related requests
 app.use("/api/polling-system/options", optionsRouter);
+
+// Middleware for handling unknown paths (404 errors)
 app.use(unknownPathHandlerMiddleware);
+
+// Middleware for handling errors
 app.use(errorHandlingMiddleware);
 
+// Basic route to confirm the API is working
 app.get("/", (req, res) => {
   res.send("Welcome to Polling-API");
 });
 
+// Start the server and connect to the database
 app.listen(3000, () => {
   console.log("Server is running at port 3000");
   connectToDB();

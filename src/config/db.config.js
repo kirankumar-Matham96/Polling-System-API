@@ -1,5 +1,9 @@
+// imports
 import mongoose from "mongoose";
 
+/**
+ * DB config using mongoose
+ */
 export const connectToDB = async () => {
   try {
     await mongoose.connect(process.env.URL);
