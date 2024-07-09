@@ -65,10 +65,27 @@ export class QuestionRepository {
 
   delete = async (questionId) => {
     try {
-      const question = await QuestionModel.findByIdAndDelete(questionId);
+      const question = await QuestionModel.findById(questionId).populate(
+        "options"
+      );
+
       if (!question) {
         throw new ApplicationError("question not found", 404);
       }
+
+      const isNotEligibleForDelete = question.options.some(
+        (option) => option.votes > 0
+      );
+
+      if (isNotEligibleForDelete) {
+        throw new ApplicationError(
+          "Question has some voted options. Cannot delete this question!",
+          403
+        );
+      }
+
+      await QuestionModel.findByIdAndDelete(questionId);
+
       return question;
     } catch (error) {
       throw error;

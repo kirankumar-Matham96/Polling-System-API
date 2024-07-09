@@ -13,6 +13,8 @@ import cors from "cors";
 import questionsRouter from "./src/features/questions/question.routes.js";
 import optionsRouter from "./src/features/options/option.routes.js";
 import { connectToDB } from "./src/config/db.config.js";
+import { errorHandlingMiddleware } from "./src/middlewares/errorHandler.middleware.js";
+import { unknownPathHandlerMiddleware } from "./src/middlewares/unknownPathHandler.middleware.js";
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.use(cors());
 
 app.use("/api/polling-system/questions", questionsRouter);
 app.use("/api/polling-system/options", optionsRouter);
+app.use(unknownPathHandlerMiddleware);
+app.use(errorHandlingMiddleware);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Polling-API");
