@@ -9,6 +9,6 @@ router.get("/", optionsController.getAllOptions);
 router.get("/:id", optionsController.getOptionById);
 router.put("/:id", optionsController.updateOptionById);
 router.delete("/:id/delete", optionsController.deleteOptionById);
-router.put("/:id/add_vote", optionsController.deleteOptionById);
+router.get("/:id/add_vote", optionsController.addNewVoteToOptionById);
 
 export default router;

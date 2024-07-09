@@ -20,8 +20,8 @@ export class QuestionController {
 
   getQuestionById = async (req, res, next) => {
     try {
-      const { id } = req.param;
-      const question = this.questionRepository.get(id);
+      const { id } = req.params;
+      const question = await this.questionRepository.get(id);
       res.status(200).json({ success: true, question });
     } catch (error) {
       next(error);

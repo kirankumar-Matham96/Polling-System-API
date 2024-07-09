@@ -1,9 +1,11 @@
-import { OptionModel, OptionsModel } from "./option.schema.js";
+import { OptionModel } from "./option.schema.js";
+import { ApplicationError } from "../../middlewares/errorHandler.middleware.js";
 
 export class OptionsRepository {
   add = async (data) => {
     try {
       const option = new OptionModel(data);
+      option.link_to_vote = `http://localhost:${process.env.PORT}/api/polling-system/options/${option._id}/add_vote`;
       return await option.save();
     } catch (error) {
       throw error;
@@ -43,6 +45,17 @@ export class OptionsRepository {
       }
 
       return option;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  addVote = async (optionId) => {
+    try {
+      const response = await OptionModel.findByIdAndUpdate(optionId, {
+        $inc: { votes: 1 },
+      });
+      return true;
     } catch (error) {
       throw error;
     }

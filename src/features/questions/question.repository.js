@@ -1,4 +1,5 @@
 import { QuestionModel } from "./question.schema.js";
+import { ApplicationError } from "../../middlewares/errorHandler.middleware.js";
 
 export class QuestionRepository {
   add = async (data) => {
@@ -36,15 +37,27 @@ export class QuestionRepository {
 
   update = async (questionId, data) => {
     try {
-      const question = await QuestionModel.findByIdAndUpdate(
-        questionId,
-        data
-      ).populate("options");
+      const question = await QuestionModel.findByIdAndUpdate(questionId, data, {
+        new: true,
+        returnDocument: "after",
+      }).populate("options");
       if (!question) {
         throw new ApplicationError("question not found", 404);
       }
 
       return question;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  updateWithNewOption = async (questionId, optionId) => {
+    try {
+      return await QuestionModel.findByIdAndUpdate(
+        questionId,
+        { $push: { options: optionId } },
+        { new: true }
+      );
     } catch (error) {
       throw error;
     }
